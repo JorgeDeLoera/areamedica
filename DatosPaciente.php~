@@ -1,0 +1,160 @@
+<?php
+session_start();
+
+if(isset($_SESSION['codigo'])){
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Administrativos</title>
+<link rel="stylesheet" href="Diseño.css">
+<link rel="stylesheet" href="DiseñoAdministrativos.css">
+</head>
+
+<body>
+<section>
+
+<header>
+<encabezado>
+<img src="Titulo.jpg">
+</encabezado>
+<key>Usted ha iniciado sesion como <?php echo $_SESSION['codigo'];?> &nbsp&nbsp&nbsp</key> 
+<nav>
+<ul>
+<li><a href="InicioAdministrativos.php">Pacientes</a>
+<ul><li><a href="InicioAdministrativos.php">Ver pacientes</a></li><li><a href="Pacientes.php">Registrar pacientes</a></li></ul></li>
+<li><a href="VerCitas.php#Citas">Citas</a>
+<ul><li><a href="VerCitas.php#Citas">Ver citas</a></li><li><a href="VerCitas.php#Historial">Ver historial de citas</a></li><li><a href="Citas.php">Registrar cita</a></li></ul></li>
+<li><a href="logout.php">Cerrar sesion</a></li>
+</ul>
+</nav>
+</header>
+
+<form method="POST" action="RegistroPacientes.php">
+<pestanas><ul>
+<li><a id="datospersonales" href="#Datos personales">Datos personales</a></li>
+<li><a id="signosvitales" href="#Signos vitales">Signos vitales</a></li>
+<li><a id="antropometria" href="#Antropometria">Antropometria</a></li>
+<li><a id="anemenesis" href="#Anamenesis">Anamenesis</a></li>
+<li><a id="citas" href="#Citas">Citas del paciente</a></li>
+<li><a></a></li>
+</ul></pestanas>
+
+<cuerpo>
+<?php
+$id= $_GET['id'];
+$link= mysqli_connect("148.202.144.23","administrador","peticion","Usuarios");
+if (!$link) {die(" ". mysqli_connect_error());}
+$sql= "SELECT * FROM General_paciente WHERE codigo= '".$id."' ";
+if ($result= mysqli_query($link, $sql)) {echo "";} 
+
+while ($row= mysqli_fetch_assoc($result)) {
+echo '<div id="Datos personales">';
+echo '<br><formulario id="datospersonales">Datos personales<br><table>';
+echo '<tr><td>Nombre&nbsp&nbsp&nbsp&nbsp<br><label>'.$row['nombre'].'</label></td>';
+echo '<td>Apellido paterno&nbsp&nbsp&nbsp&nbsp<br><label>'.$row['apellidopaterno'].'</label></td>';
+echo '<td>Apellido materno&nbsp&nbsp&nbsp&nbsp<br><label>'.$row['apellidomaterno'].'</label></td>';
+echo '<td>Edad&nbsp&nbsp&nbsp&nbsp<br><label>'.$row['edad'].'</label></td>';
+echo '<td>Fecha de registro&nbsp&nbsp&nbsp&nbsp<br><label>'.$row['fecha'].'</label></td></tr>';
+echo '<tr><td>Sexo&nbsp&nbsp&nbsp&nbsp<br><label>'.$row['sexo'].'</label></td>';
+echo '<td>Actividad laboral&nbsp&nbsp&nbsp&nbsp<br><label>'.$row['actividadlaboral'].'</label></td>';
+echo '<td>Telefono&nbsp&nbsp&nbsp&nbsp<br><label>'.$row['telefono'].'</label></td>';
+echo '<td>Telefono de emergencia&nbsp&nbsp&nbsp&nbsp<br><label>'.$row['telefonoemergencia'].'</label></td>';
+echo '<td>Codigo&nbsp&nbsp&nbsp&nbsp<br><label>'.$row['codigo'].'</label></td></tr>';
+echo '<tr><td>Correo&nbsp&nbsp&nbsp&nbsp<br><label>'.$row['correo'].'</label></td>';
+echo '<td>Contraseña&nbsp&nbsp&nbsp&nbsp<br><label>'.$row['contrasena'].'</label></td></tr>';
+echo '<br></table></formulario><br>';
+echo '</div>';
+}
+
+$sql= "SELECT * FROM Signosvitales_paciente WHERE codigo= '".$id."' ";
+if ($result= mysqli_query($link, $sql)) {echo "";} 
+
+while ($row= mysqli_fetch_assoc($result)) {
+echo '<div id="Signos vitales">';
+echo '<br><formulario id="signosvitales">Signos vitales<br><table>';
+echo '<tr><td>Fecha de registro&nbsp&nbsp&nbsp&nbsp<label>'.$row['fecha'].'</label></td></tr>';
+echo '<tr><td>Frecuencia cardiaca&nbsp&nbsp&nbsp&nbsp<br><label>'.$row['frecuenciacardiaca'].'</label></td>';
+echo '<td>Frecuencia respiratoria&nbsp&nbsp&nbsp&nbsp<br><label>'.$row['frecuenciarespiratoria'].'</label></td>';
+echo '<td>Presion arterial&nbsp&nbsp&nbsp&nbsp<br><label>'.$row['presionarterial'].'</label></td>';
+echo '<td>Glucosa&nbsp&nbsp&nbsp&nbsp<br><label>'.$row['glucosa'].'</label></td>';
+echo '<td>Oximetria&nbsp&nbsp&nbsp&nbsp<br><label>'.$row['oximetria'].'</label></td></tr>';
+echo '<tr><td>Temperatura&nbsp&nbsp&nbsp&nbsp<br><label>'.$row['temperatura'].'</label></td></tr>';
+echo '<br></table></formulario><br>';
+echo '</div>';
+}
+
+$sql= "SELECT * FROM Antropometria_paciente WHERE codigo= '".$id."' ";
+if ($result= mysqli_query($link, $sql)) {echo "";} 
+
+while ($row= mysqli_fetch_assoc($result)) {
+echo '<div id="Antropometria">';
+echo '<br><formulario id="antropometria">Antropometria<br><table>';
+echo '<tr><td>Fecha de registro&nbsp&nbsp&nbsp&nbsp<label>'.$row['fecha'].'</label></td></tr>';
+echo '<tr><td>Peso&nbsp&nbsp&nbsp&nbsp<br><label>'.$row['peso'].'kg</label></td>';
+echo '<td>Talla&nbsp&nbsp&nbsp&nbsp<br><label>'.$row['talla'].'</label></td>';
+echo '<td>IMC&nbsp&nbsp&nbsp&nbsp<br><label>'.$row['imc'].'</label></td>';
+echo '<td>Cintura&nbsp&nbsp&nbsp&nbsp<br><label>'.$row['cintura'].'cm</label></td>';
+echo '<td>Cadera&nbsp&nbsp&nbsp&nbsp<br><label>'.$row['cadera'].'cm</label></td></tr>';
+echo '<br></table></formulario><br>';
+echo '</div>';
+}
+
+$sql= "SELECT * FROM Anamenesis_paciente WHERE codigo= '".$id."' ";
+if ($result= mysqli_query($link, $sql)) {echo "";} 
+
+while ($row= mysqli_fetch_assoc($result)) {
+echo '<div id="Anamenesis">';
+echo '<br><formulario id="anemenesis">Anemenesis<br><table>';
+echo '<tr><td>Fecha de registro&nbsp&nbsp&nbsp&nbsp<label>'.$row['fecha'].'</label></td></tr>';
+echo '<tr><td>Tipo de sangre&nbsp&nbsp&nbsp&nbsp<br><label>'.$row['tipodesangre'].'</label></td>';
+echo '<td>Enfermedades cronicodegenerativas&nbsp&nbsp&nbsp&nbsp<br><label>'.$row['cronicodegenerativas'].'</label></td>';
+echo '<td>Cirugias&nbsp&nbsp&nbsp&nbsp<br><label>'.$row['cirugias'].'</label></td>';
+echo '<td>Toxicomanias&nbsp&nbsp&nbsp&nbsp<br><label>'.$row['toxicomanias'].'</label></td></tr>';
+echo '<tr><td>Alergias&nbsp&nbsp&nbsp&nbsp<br><label>'.$row['alergias'].'</label></td>';
+echo '<td>Padecimiento actual&nbsp&nbsp&nbsp&nbsp<br><label>'.$row['padecimiento'].'</label></td>';
+echo '<td>Inmunologia&nbsp&nbsp&nbsp&nbsp<br><label>'.$row['inmunologia'].'</label></td>';
+echo '<td>Transfusiones&nbsp&nbsp&nbsp&nbsp<br><label>'.$row['transfusiones'].'</label></td></tr>';
+echo '<tr><td>Enfermedades hereditarias&nbsp&nbsp&nbsp&nbsp<br><label>'.$row['hereditarias'].'</label></td></tr>';
+echo '<br></table></formulario><br>';
+echo '</div>';
+}
+
+$sql= "SELECT * FROM Cita WHERE codigo= '".$id."' ";
+if ($result= mysqli_query($link, $sql)) {echo "";} 
+
+while ($row= mysqli_fetch_assoc($result)) {
+echo '<div id="Citas">';
+echo '<br><formulario>';
+echo 'Cita '.$row['tipodecita'].'<br>';
+echo 'Nombre del paciente: '.$row['paciente'].'&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp';
+echo ''.$row['fechahora'].'&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp';
+echo '<a href="DatosCita.php?id='.$row['fechahora'].'" class="boton2">Revisar cita</a><br><br>';
+echo 'Atendido por: '.$row['medico'].'';
+echo '<t>Sintomas: '.$row['sintomas'].'</t>';
+echo '</formulario><br>';
+echo '</div>';
+}
+
+mysql_free_result($result);  
+?>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</cuerpo>
+
+</section>
+
+<footer>
+---------------------------------------------
+</footer>
+
+</body>
+</html>
+
+<?php
+}
+else{
+echo "Usted no ha iniciado sesion";
+}
+?>

@@ -1,0 +1,40 @@
+<?php
+session_start();
+
+if(isset($_SESSION['codigo'])){
+
+$link= mysqli_connect("148.202.144.23","administrador","peticion","Usuarios");
+if (!$link) {die(" ". mysqli_connect_error());}
+$sql= "SELECT * FROM General_paciente WHERE codigo= '".$_POST['codigo']."'";
+if ($result= mysqli_query($link, $sql)) {echo "";} 
+
+while ($row= mysqli_fetch_assoc($result)) {
+$paciente= $row['nombre'].' '.$row['apellidopaterno'].' '.$row['apellidomaterno'];
+
+}
+
+mysql_free_result($result);
+
+$fecha= $_POST['fecha'];
+$hora= $_POST['hora'];
+$datetime= "$fecha $hora";
+
+$link= mysqli_connect("148.202.144.23","administrador","peticion","Usuarios");
+if (!$link) {die(" ". mysqli_connect_error());}
+
+$sql= "INSERT INTO Cita (tipodecita,fechahora,paciente,codigo,sintomas) VALUES('$_POST[tipodecita]','$datetime','$paciente','$_POST[codigo]','$_POST[sintomas]')";
+if (mysqli_query($link, $sql)) {
+header("Location:VerCitas.php#Citas");
+}
+else {
+header("Location:Citas.php#Error");
+}
+
+mysqli_close($link);
+
+}
+else{
+echo "Usted no ha iniciado sesion";
+}
+
+?> 

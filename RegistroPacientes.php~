@@ -1,0 +1,40 @@
+<?php
+session_start();
+
+if(isset($_SESSION['codigo'])){
+
+$link= mysqli_connect("148.202.144.23","administrador","peticion","Usuarios");
+if (!$link) {die(" ". mysqli_connect_error());}
+
+$sql= "INSERT INTO General_paciente (nombre,apellidopaterno,apellidomaterno,fecha,edad,sexo,actividadlaboral,telefono,telefonoemergencia,codigo,correo,contrasena) VALUES('$_POST[nombre]','$_POST[apellidopaterno]','$_POST[apellidomaterno]','$_POST[fecha]','$_POST[edad]','$_POST[sexo]','$_POST[laboral]','$_POST[telefono]','$_POST[telefonoemergencia]','$_POST[codigo]','$_POST[correo]','$_POST[contrasena]')";
+if (mysqli_query($link, $sql)) {} 
+else {
+echo "Hubo un error al enviar los datos generales del paciente: " . $sql . "<br>" . mysqli_error($link);}
+
+$sql= "INSERT INTO Signosvitales_paciente (codigo,fecha,frecuenciacardiaca,frecuenciarespiratoria,presionarterial,glucosa,oximetria,temperatura) VALUES('$_POST[codigo]','$_POST[fecha]','$_POST[frecuenciacardiaca]','$_POST[frecuenciarespiratoria]','$_POST[presionarterial]','$_POST[glucosa]','$_POST[oximetria]','$_POST[temperatura]')";
+if (mysqli_query($link, $sql)) {
+}
+else {
+echo "Hubo un error al enviar los datos medicos del paciente: " . $sql . "<br>" . mysqli_error($link);}
+
+$sql= "INSERT INTO Antropometria_paciente (codigo,peso,talla,imc,cintura,cadera) VALUES('$_POST[codigo]','$_POST[fecha]','$_POST[peso]','$_POST[talla]','$_POST[imc]','$_POST[cintura]','$_POST[cadera]')";
+if (mysqli_query($link, $sql)) {
+}
+else {
+echo "Hubo un error al enviar los datos medicos del paciente: " . $sql . "<br>" . mysqli_error($link);}
+
+$sql= "INSERT INTO Anamenesis_paciente (codigo,fecha,tipodesangre,cronicodegenerativas,cirugias,toxicomanias,alergias,padecimiento,inmunologia,hereditarias,transfusiones) VALUES('$_POST[codigo]','$_POST[fecha]','$_POST[tipodesangre]','$_POST[cronicodegenerativas]','$_POST[cirugias]','$_POST[toxicomanias]','$_POST[alergias]','$_POST[padecimiento]','$_POST[inmunologia]','$_POST[hereditarias]','$_POST[transfusiones]')";
+if (mysqli_query($link, $sql)) {
+header("Location:InicioAdministrativos.php");
+}
+else {
+echo "Hubo un error al enviar los datos medicos del paciente: " . $sql . "<br>" . mysqli_error($link);}
+
+mysqli_close($link);
+
+}
+else{
+echo "Usted no ha iniciado sesion";
+}
+
+?> 

@@ -1,0 +1,24 @@
+<?php
+session_start();
+
+if(isset($_SESSION['codigo'])){
+
+$id= $_GET['id'];
+$link= mysqli_connect("148.202.144.23","administrador","peticion","Usuarios");
+if (!$link) {die(" ". mysqli_connect_error());}
+
+$sql= "UPDATE Cita SET sintomas='$_POST[sintomas]',observaciones='$_POST[observaciones]' WHERE fechahora='".$id."'";
+if (mysqli_query($link, $sql)) {
+header("Location:VerCitas.php");
+}
+else {
+echo "Hubo un error: <br>".mysqli_error($link);}
+
+mysqli_close($link);
+
+}
+else{
+echo "Usted no ha iniciado sesion";
+}
+
+?> 

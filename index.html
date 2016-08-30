@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Inicio</title>
+<link rel="stylesheet" href="Diseño.css">
+</head>
+
+<body>
+
+<header>
+<img src="Titulo.jpg">
+</header>
+
+
+<div id="Administrador" class="administrador">
+<br><br><br>
+<sign>
+<form method="post" action="login_administrador.php"><h3>Acceder como administrador</h3><table>
+<tr><td>Codigo<br><input type="text" name="codigo" required="required"></td></tr>
+<tr><td>Contraseña<br><input type="password" name="contrasena" required="required"></td></tr>
+<tr><td><br><input type="submit" name="login" value="Entrar" class="boton"></td></tr></table></form>
+</sign>
+<br><br>
+</div>
+
+<div id="Acceder">
+<br><br><br>
+<sign>
+<form method="post" action="login.php"><h3>Acceder como medico</h3><table>
+<tr><td>Codigo<br><input type="text" name="codigo" required="required"></td></tr>
+<tr><td>Contraseña<br><input type="password" name="contrasena" required="required"></td></tr>
+<tr><td><br><input type="submit" name="login" value="Entrar" class="boton"></td></tr></table></form>
+
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+
+<form method="post" action="paciente/login_paciente.php"><h3>Acceder como paciente</h3><table>
+<tr><td>Nombre<br><input type="text" name="nombre" required="required"></td></tr>
+<tr><td>Contraseña<br><input type="password" name="contrasena" required="required"></td></tr>
+<tr><td><br><input type="submit" name="login" value="Entrar" class="boton"></td></tr></table></form>
+</sign>
+<br><br><br>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Administrativos</title>
+<link rel="stylesheet" href="DiseñoAdministrativos.css">
+</head>
+
+<body>
+
+<img src="Titulo.jpg">
+
+<section>
+
+<header>
+<nav>
+<ul>
+<li><a href="#Pacientes">Pacientes</a></li>
+<li><a href="#Citas">Citas</a></li>
+<li><a href="logout.php">Cerrar sesion</a></li>
+</ul>
+</nav>
+</header>
+
+<section>
+</section>
+
+<section>
+</section>
+
+</section>
+
+<footer>
+---------------------------------------------
+</footer>
+
+</body>
+</html>

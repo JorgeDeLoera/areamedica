@@ -1,0 +1,16 @@
+<?php
+$link= mysqli_connect("148.202.144.23","administrador","peticion","Usuarios");
+if (!$link) {die(" ". mysqli_connect_error());}
+$sql= "SELECT * FROM General_paciente";
+if ($result= mysqli_query($link, $sql)) {echo "";} 
+
+while ($row= mysqli_fetch_assoc($result)) {
+echo '<html><a href="#'.$row['ID'].'">';
+echo $row['nombre'].' ';
+echo $row['apellidopaterno'].' ';
+echo $row['apellidomaterno'].' ';
+echo '<br></a></html>';
+}
+
+mysql_free_result($result); 
+?>

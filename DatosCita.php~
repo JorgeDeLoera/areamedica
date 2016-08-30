@@ -1,0 +1,97 @@
+<?php
+session_start();
+
+if(isset($_SESSION['codigo'])){
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Administrativos</title>
+<link rel="stylesheet" href="Diseño.css">
+<link rel="stylesheet" href="DiseñoAdministrativos.css">
+</head>
+
+<body>
+<section>
+
+<header>
+<encabezado>
+<img src="Titulo.jpg">
+</encabezado>
+<key>Usted ha iniciado sesion como <?php echo $_SESSION['codigo'];?> &nbsp&nbsp&nbsp</key> 
+<nav>
+<ul>
+<li><a href="InicioAdministrativos.php">Pacientes</a>
+<ul><li><a href="InicioAdministrativos.php">Ver pacientes</a></li><li><a href="Pacientes.php">Registrar pacientes</a></li></ul></li>
+<li><a href="VerCitas.php#Citas">Citas</a>
+<ul><li><a href="VerCitas.php#Citas">Ver citas</a></li><li><a href="VerCitas.php#Historial">Ver historial de citas</a></li><li><a href="Citas.php">Registrar cita</a></li></ul></li>
+<li><a href="logout.php">Cerrar sesion</a></li>
+</ul>
+</nav>
+</header>
+
+<div>
+<?php
+$link= mysqli_connect("148.202.144.23","administrador","peticion","Usuarios");
+if (!$link) {die(" ". mysqli_connect_error());}
+
+$sql= "SELECT * FROM Administrativo WHERE codigo = '".$_SESSION['codigo']."' ";
+if ($result= mysqli_query($link, $sql)) {echo "";}
+while ($row= mysqli_fetch_assoc($result)) {
+$medico= $row['nombre'].' '.$row['apellidopaterno'].' '.$row['apellidomaterno'];
+}
+
+mysql_free_result($result);
+
+?>
+
+<br>
+<?php
+$link= mysqli_connect("148.202.144.23","administrador","peticion","Usuarios");
+if (!$link) {die(" ". mysqli_connect_error());}
+$sql= "SELECT * FROM Cita WHERE fechahora = '".$id."' ";
+if ($result= mysqli_query($link, $sql)) {echo "";} 
+
+while ($row= mysqli_fetch_assoc($result)) {
+echo '<form method="POST" action="ModificarCitas.php?id='.$row['fechahora'].'">';
+echo '<formulario><table>';
+echo '<tr><td>Nombre del paciente: '.$row['paciente'].'&nbsp&nbsp&nbsp&nbsp</td><td>Fecha y hora: '.$row['fechahora'].'</td></tr>';
+echo '<tr><td>Motivo de consulta: '.$row['sintomas'].'</td><td>Tipo de consulta: '.$row['tipodecita'].'</td></tr>';
+echo '<tr><td>Nombre del medico: '.$medico.'<t><input type="text" name="medico" value="'.$medico.'" readonly="readonly"></t></td></tr>';
+echo '<t><input type="text" name="codigo" value="'.$row['codigo'].'" readonly="readonly"></t>';
+echo '</table><br>';
+echo '<table><tr><td>Signos vitales: </td><td>
+<formulario id="signosvitales"><table>
+<tr><td>Frecuencia cardiaca<br><input type="number" min="0" name="frecuenciacardiaca" value=""></td><td>Frecuencia respiratoria<br><input type="number" min="0" name="frecuenciarespiratoria"></td><td>Presion arterial<br><input type="number" min="0"  name="presionarterial"></td></tr>
+<tr><td>Glucosa<br><input type="number" min="0" name="glucosa"></td><td>Oximetria<br><input type="number" min="0" name="oximetria"></td><td>Temperatura<br><input type="number" min="0" name="temperatura"></td></tr>
+</table><br></formulario>
+</td></tr>';
+echo '<tr><td>Tx: </td><td><textarea name="observaciones" rows="3" cols="100">'.$row['observaciones'].'</textarea></td></tr>';
+echo '<tr><td>Plan:</td><td><textarea name="plan" rows="10" cols="100">'.$row['plan'].'</textarea></td></tr>';
+echo '<tr><td>Diagnostico:</td><td><textarea name="diagnostico" rows="3" cols="100">'.$row['diagnostico'].'</textarea></td></tr></table>';
+echo '<br><table><input type="submit" value="Terminar cita" class="boton2">&nbsp&nbsp<a href="pdf.php?id='.$row['fechahora'].'" class="boton2" target="blank">Imprimir receta</a>&nbsp&nbsp<a href="" class="boton2">Imprimir justificante</a>';
+echo '</table></formulario></form>';
+}
+
+mysql_free_result($result); 
+?>
+<br><br><br>
+</div>
+
+</section>
+
+<footer>
+---------------------------------------------
+</footer>
+
+</body>
+</html>
+
+<?php
+}
+else{
+echo "Usted no ha iniciado sesion";
+}
+?>

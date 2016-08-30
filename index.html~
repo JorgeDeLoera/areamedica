@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Inicio</title>
+<link rel="stylesheet" href="Diseño.css">
+</head>
+
+<body>
+<section>
+
+<header>
+<encabezado>
+<img src="Titulo.jpg">
+</encabezado>
+<nav>
+<ul>
+<li><a href="index.html">Inicio</a></li>
+<li><a href="#Acceder">Acceder</a></li>
+<li><a href="#Administrador">Acceder como administrador</a></li>
+</ul>
+</nav>
+</header>
+
+<div id="Administrador" class="administrador">
+<br><br><br>
+<sign>
+<form method="POST" action="login_administrador.php">Acceder como administrador<br><br><table>
+<tr>Codigo<br><input type="TextBox" name="codigo" required="required"><br>Contraseña<br><input type="password" name="contrasena" required="required"><br><input type="submit" name="login" value="Entrar"></tr></table></form>
+</sign>
+<br><br>
+</div>
+
+<div>
+
+</div>
+
+<div id="Acceder">
+<br><br><br>
+<sign>
+<form method="POST" action="login.php">Acceder como medico<br><br><table>
+<tr>Codigo<br><input type="text" name="codigo" required="required"><br>Contraseña<br><input type="password" name="contrasena" required="required"><br><input type="submit" name="login" value="Entrar"></tr></table></form>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+<form method="" action="">Acceder como paciente<br><br><table>
+<tr>Codigo<br><input type="TextBox" name="" required="required"><br>Contraseña<br><input type="password" name="" required="required"><br><input type="submit" name="login" value="Entrar"></tr></table></form>
+</sign>
+<br><br><br>
+</div>
+
+
+</section>
+
+<footer>
+---------------------------------------------
+</footer>
+
+</body>
+</html>

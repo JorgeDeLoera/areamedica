@@ -1,0 +1,73 @@
+key{
+font-weight:bold;
+display: block;
+text-align:right;
+color:#fff;
+}
+.pestana{
+background:rgb(5,69,113);
+display: block;
+padding: 1em;
+color:#fff;
+}
+.pestana > a{
+color: #fff;
+padding: 0.5em;
+text-decoration: none;
+}
+formulario{
+border-radius: 4px;
+box-shadow:0px 0px 2px #000;
+display:block;
+padding:1.2em;
+}
+formulario:hover{
+box-shadow:0px 0px 5px #000;
+transition: box-shadow 200ms;
+}
+formulario > a{
+text-decoration:none;
+color:#000;
+}
+.datospersonales{
+background:#2e9afe;
+}
+.signosvitales{
+background:#f7d358;
+}
+.antropometria{
+background:#62d200;
+}
+.anemenesis{
+background:#fe9a2e;
+}
+#citas{
+background:#ccc;
+}
+.info{
+padding: 0.5em;
+padding-right: 3em;
+color: #fff;
+background: green;
+font-weight: bold;
+text-align: right;
+}
+h2{
+font-weight: normal;
+margin-top: 0;
+padding: 0.5em;
+box-shadow: 0px 1px 1px #000;
+}
+label{
+font-weight: bold;
+}
+.historial,.citas{
+display:none;
+}
+.historial:target{
+background:#ddd;
+display:block;
+}
+.citas:target{
+display:block;
+}

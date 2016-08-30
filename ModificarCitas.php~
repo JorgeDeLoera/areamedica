@@ -1,0 +1,32 @@
+<?php
+session_start();
+
+if(isset($_SESSION['codigo'])){
+
+$id= $_GET['id'];
+$fecha= date("Y-m-d");
+
+$link= mysqli_connect("148.202.144.23","administrador","peticion","Usuarios");
+if (!$link) {die(" ". mysqli_connect_error());}
+
+$sql= "INSERT INTO Signosvitales_paciente (codigo,fecha,frecuenciacardiaca,frecuenciarespiratoria,presionarterial,glucosa,oximetria,temperatura) VALUES('$_POST[codigo]','$fecha','$_POST[frecuenciacardiaca]','$_POST[frecuenciarespiratoria]','$_POST[presionarterial]','$_POST[glucosa]','$_POST[oximetria]','$_POST[temperatura]')";
+if (mysqli_query($link, $sql)) {
+}
+else {
+echo "Hubo un error al enviar los datos medicos del paciente: " . $sql . "<br>" . mysqli_error($link);}
+
+$sql= "UPDATE Cita SET medico='$_POST[medico]',status='Terminada',observaciones='$_POST[observaciones]',plan='$_POST[plan]',diagnostico='$_POST[diagnostico]' WHERE fechahora='".$id."'";
+if (mysqli_query($link, $sql)) {
+header("Location:VerCitas.php#Historial");
+}
+else {
+echo "Hubo un error: <br>".mysqli_error($link);}
+
+mysqli_close($link);
+
+}
+else{
+echo "Usted no ha iniciado sesion";
+}
+
+?> 

@@ -1,0 +1,97 @@
+<?php
+session_start();
+
+if(isset($_SESSION['codigo'])){
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Administrativos</title>
+<link rel="stylesheet" href="Diseño.css">
+<link rel="stylesheet" href="DiseñoAdministrativos.css">
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script> 
+<style>
+.resaltar{background-color:#0c0;}
+</style> 
+  <script type='text/javascript' >
+    $.expr[':'].icontains = function(obj, index, meta, stack){
+    return (obj.textContent || obj.innerText || jQuery(obj).text() || '').toLowerCase().indexOf(meta[3].toLowerCase()) >= 0;
+    };
+    $(document).ready(function(){   
+        $('#buscador').keyup(function(){
+                     buscar = $(this).val();
+                     $('#lista a').removeClass('resaltar');
+                            if(jQuery.trim(buscar) != ''){
+                               $("#lista a:icontains('" + buscar + "')").addClass('resaltar');
+                            }
+            });
+    });   
+ </script>
+
+</head>
+
+<body>
+<section>
+
+<header>
+<encabezado>
+<img src="Titulo.jpg">
+</encabezado>
+<key>Usted ha iniciado sesion como <?php echo $_SESSION['codigo'];?> &nbsp&nbsp&nbsp</key> 
+<nav>
+<ul>
+<li><a href="InicioAdministrativos.php">Pacientes</a>
+<ul><li><a href="InicioAdministrativos.php">Ver pacientes</a></li><li><a href="Pacientes.php">Registrar pacientes</a></li></ul></li>
+<li><a href="VerCitas.php#Citas">Citas</a>
+<ul><li><a href="VerCitas.php#Citas">Ver citas</a></li><li><a href="VerCitas.php#Historial">Ver historial de citas</a></li><li><a href="Citas.php">Registrar cita</a></li></ul></li>
+<li><a href="logout.php">Cerrar sesion</a></li>
+</ul>
+</nav>
+</header>
+
+<pestanas>
+<ul>
+<li>Escriba el paciente a buscar, este se resaltara en la pantalla: &nbsp</li>
+<li><input type="search" id="buscador"></li>
+</ul>
+</pestanas>
+<br><br>
+
+<div id="lista">
+<?php
+$link= mysqli_connect("148.202.144.23","administrador","peticion","Usuarios");
+if (!$link) {die(" ". mysqli_connect_error());}
+$sql= "SELECT * FROM General_paciente";
+if ($result= mysqli_query($link, $sql)) {echo "";} 
+
+while ($row= mysqli_fetch_assoc($result)) {
+echo '<html><paciente><a href="DatosPaciente.php?id='.$row['ID'].'">';
+echo $row['nombre'].' ';
+echo $row['apellidopaterno'].' ';
+echo $row['apellidomaterno'];
+echo '<t>Codigo: '.$row['codigo'].'</t>';
+echo '</a></paciente><br></html>';
+}
+
+mysql_free_result($result); 
+?>
+</div>
+
+</section>
+
+<footer>
+---------------------------------------------
+</footer>
+
+</body>
+</html>
+
+<?php
+}
+else{
+echo "Usted no ha iniciado sesion";
+}
+?>

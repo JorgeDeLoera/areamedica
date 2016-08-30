@@ -1,0 +1,120 @@
+<?php
+session_start();
+
+if(isset($_SESSION['codigo'])){
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Administrativos</title>
+<link rel="stylesheet" href="Diseño.css">
+<link rel="stylesheet" href="DiseñoAdministrativos.css">
+</head>
+
+<body>
+<section>
+
+<header>
+<encabezado>
+<img src="Titulo.jpg">
+</encabezado>
+<key>Usted ha iniciado sesion como <?php echo $_SESSION['codigo'];?> &nbsp&nbsp&nbsp</key>
+<nav>
+<ul>
+<li><a href="InicioAdministrativos.php">Pacientes</a>
+<ul><li><a href="InicioAdministrativos.php">Ver pacientes</a></li><li><a href="Pacientes.php">Registrar pacientes</a></li></ul></li>
+<li><a href="VerCitas.php#Citas">Citas</a>
+<ul><li><a href="VerCitas.php#Citas">Ver citas</a></li><li><a href="VerCitas.php#Historial">Ver historial de citas</a></li><li><a href="Citas.php">Registrar cita</a></li></ul></li>
+<li><a href="logout.php">Cerrar sesion</a></li>
+</ul>
+</nav>
+</header>
+
+<form method="POST" action="RegistroPacientes.php">
+<pestanas><ul>
+<li><a id="datospersonales" href="#Datos personales">Datos personales</a></li>
+<li><a id="signosvitales" href="#Signos vitales">Signos vitales</a></li>
+<li><a id="antropometria" href="#Antropometria">Antropometria</a></li>
+<li><a id="anemenesis" href="#Anamenesis">Anamenesis</a></li>
+<li><a><input type="submit" name="enviar" value="Enviar" class="boton"></a></li>
+</ul></pestanas>
+
+<cuerpo>
+<div id="Datos personales">
+<br>
+<formulario id="datospersonales">
+<br>Datos personales<br><br>
+<table>
+<tr><td>Nombre<br><input type="TextBox" name="nombre" required=”required”></td><td>Apellido paterno<br><input type="TextBox" name="apellidopaterno" required=”required”></td><td>Apellido materno<br><input type="TextBox" name="apellidomaterno" required=”required”></td></tr>
+<tr><td>Fecha de registro<br><input type="date" name="fecha" value="<?php echo date("Y-m-d");?>"></td></tr>
+<tr><td>Edad<br><input type="number" name="edad" min="0" required=”required”></td></tr>
+<tr><td>Sexo<br><input type="TextBox" name="sexo" required=”required”></td></tr>
+<tr><td>Actividad laboral<br><input type="TextBox" name="laboral" required=”required”></td></tr>
+<tr><td>Telefono<br><input type="TextBox" name="telefono"></td><td>Telefono de emergencia<br><input type="TextBox" name="telefonoemergencia"></td></tr>
+<tr><td>Codigo<br><input type="TextBox" name="codigo" required=”required”></td><td>Correo<br><input type="email" name="correo"></td><td>Asigne una contraseña<br><input type="TextBox" name="contrasena" required=”required”></td></tr>
+</table>
+<br>
+</formulario>
+</div>
+
+<div id="Signos vitales">
+<br>
+<formulario id="signosvitales">
+<br>Signos vitales<br><br>
+<table>
+<tr><td>Frecuencia cardiaca<br><input type="number" min="0" name="frecuenciacardiaca"></td><td>Frecuencia respiratoria<br><input type="number" min="0" name="frecuenciarespiratoria"></td></tr>
+<tr><td>Presion arterial<br><input type="number" min="0"  name="presionarterial"></td><td>Glucosa<br><input type="number" min="0" name="glucosa"></td><td>Oximetria<br><input type="number" min="0" name="oximetria"></td></tr>
+<tr><td>Temperatura<br><input type="number" min="0" name="temperatura"></td></tr>
+</table>
+<br>
+</formulario>
+</div>
+
+<div id="Antropometria">
+<br>
+<formulario id="antropometria">
+<br>Antropometria<br><br>
+<table>
+<tr><td>Peso<br><input type="number" min="0" name="peso">kg</td><td>Talla<br><input type="number" min="0" name="talla"></td></tr>
+<tr><td>IMC<br><input type="number" min="0" name="imc"></td><td>Cintura<br><input type="number" min="0" name="cintura">cm</td><td>Cadera<br><input type="number" min="0" name="cadera">cm</td></tr>
+</table>
+<br>
+</formulario>
+</div>
+
+<div id="Anamenesis">
+<br>
+<formulario id="anemenesis">
+<br>Anemenesis<br><br>
+<table>
+<tr><td>Tipo de sangre<br><input type="TextBox" name="tipodesangre"></td><td>Enfermedades cronicodegenerativas<br><input type="TextBox" name="cronicodegenerativas"></td><tr>
+<tr><td>Cirugias<br><input type="TextBox" name="cirugias"></td><td>Toxicomanias<br><input type="TextBox" name="toxicomanias"></td></tr>
+<tr><td>Alergias<br><input type="TextBox" name="alergias"></td><td>Padecimiento actual<br><input type="TextBox" name="padecimiento"></td></tr>
+<tr><td>Inmunologia<br><input type="TextBox" name="inmunologia"></td><td>Transfusiones<br><input type="TextBox" name="transfusiones"></td></tr>
+<tr><td>Enfermedades hereditarias<br><input type="TextBox" name="hereditarias"></td></tr>
+</table>
+<br>
+</formulario>
+<br>
+</form>
+</div>
+<br><br><br><br><br><br><br><br><br><br>
+</cuerpo>
+
+</section>
+
+<footer>
+---------------------------------------------
+</footer>
+
+</body>
+</html>
+
+<?php
+}
+else{
+echo "Usted no ha iniciado sesion";
+}
+?>

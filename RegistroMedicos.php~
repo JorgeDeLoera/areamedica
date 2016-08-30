@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Inicio</title>
+<link rel="stylesheet" href="Diseño.css">
+</head>
+
+<?php
+include_once 'RegistroAdministrativos.php';
+?>
+
+<body>
+<section>
+
+<header>
+<head>Conserva tu salud</head>
+<nav>
+<ul>
+<li><a href="index.html">INICIO</a></li>
+<li><a href="index.html#Acceder">Acceder</a></li>
+<li><a href="RegistroAdministrativos.html">Registrarse como medico</a></li>
+</ul>
+</nav>
+</header>
+
+<sign>
+<form method="POST" action="RegistroAdministrativos.php"><table>
+<tr><td>Nombre<br><input type="TextBox" name="nombre"></td><td>Apellido paterno<br><input type="TextBox" name="apellidopaterno"></td><td>Apellido materno<br><input type="TextBox" name="apellidomaterno"></td></tr>
+<tr><td>Especialidad<br><input type="TextBox" name="especialidad"></td></tr>
+<tr><td>Codigo<br><input type="TextBox" name="codigo"></td></tr>
+<tr><td>Telefono<br><input type="TextBox" name="telefono"></td><td>Celular<br><input type="TextBox" name="celular"></td></tr>
+<tr><td>Correo electronico<br><input type="TextBox" name="correo"></td></tr>
+<tr><td>Escriba una contraseña<br><input type="TextBox"></td></tr>
+<tr><td>Vuelva a escribir la contraseña<br><input type="TextBox" name="contrasena"></td></tr>
+<tr><td><input type="submit" name="enviar" value="Enviar"></td></tr>
+</table></form>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</sign>
+
+</section>
+
+<footer>
+---------------------------------------------
+</footer>
+</body>
+</html>

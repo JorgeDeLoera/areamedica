@@ -1,0 +1,93 @@
+<?php
+session_start();
+
+if(isset($_SESSION['codigo'])){
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Administrativos</title>
+<link rel="stylesheet" href="Diseño.css">
+<link rel="stylesheet" href="DiseñoAdministrativos.css">
+</head>
+
+<body>
+<section>
+
+<header>
+<encabezado>
+<img src="Titulo.jpg">
+</encabezado>
+<key>Usted ha iniciado sesion como <?php echo $_SESSION['codigo'];?> &nbsp&nbsp&nbsp</key>
+<nav>
+<ul>
+<li><a href="InicioAdministrativos.php">Pacientes</a>
+<ul><li><a href="InicioAdministrativos.php">Ver pacientes</a></li><li><a href="Pacientes.php">Registrar pacientes</a></li></ul></li>
+<li><a href="VerCitas.php#Citas">Citas</a>
+<ul><li><a href="VerCitas.php#Citas">Ver citas</a></li><li><a href="VerCitas.php#Historial">Ver historial de citas</a></li><li><a href="Citas.php">Registrar cita</a></li></ul></li>
+<li><a href="logout.php">Cerrar sesion</a></li>
+</ul>
+</nav>
+</header>
+
+<sign>
+<form method="POST" action="RegistroCitas.php"> 
+<br>Registrar una cita<br><br>
+<pestanas>
+<ul>
+<li><a><input name="tipodecita" value="Medica" type="radio" required=”required”>Medica</a></li>
+<li><a><input name="tipodecita" value="Nutricional" type="radio">Nutricional</a></li>
+<li><a><input name="tipodecita" value="Papanicolao" type="radio">Papanicolao</a></li>
+<li><a><input name="tipodecita" value="PCR" type="radio">PCR</a></li>
+<li><a><input name="tipodecita" value="Mamografia" type="radio">Mamografia</a></li>
+</ul>
+</pestanas><br>
+
+<table>
+<tr><td>Fecha de la cita<br><input type="date" name="fecha" value="<?php echo date("Y-m-d");?>" min="<?php echo date("Y-m-d");?>" required=”required”></td>
+<td>Hora<br><input type="time" name="hora" required=”required” min="08:00" max="20:00" step="1200">
+<div id="Error" class="historial">
+Ya hay una cita en esta fecha y hora
+</div>
+</td><td>Codigo del paciente<br><input name="codigo" required=”required” list="paciente">
+<datalist id="paciente">
+<?php
+$link= mysqli_connect("148.202.144.23","administrador","peticion","Usuarios");
+if (!$link) {die(" ". mysqli_connect_error());}
+$sql= "SELECT * FROM General_paciente";
+if ($result= mysqli_query($link, $sql)) {echo "";} 
+
+while ($row= mysqli_fetch_assoc($result)) {
+echo '<html><option value="'.$row['codigo'].'">';
+echo $row['nombre'].' ';
+echo $row['apellidopaterno'].' ';
+echo $row['apellidomaterno'];
+echo '</option></html>';
+}
+
+mysql_free_result($result); 
+?></datalist></td></tr></table>
+Motivo de la consulta<br><textarea name="sintomas" rows="5" cols="100"></textarea><br><br>
+<input type="submit" name="enviar" value="Registrar" class="boton">
+<br><br>
+</form>
+</sign>
+<br><br><br>
+
+</section>
+
+<footer>
+---------------------------------------------
+</footer>
+
+</body>
+</html>
+
+<?php
+}
+else{
+echo "Usted no ha iniciado sesion";
+}
+?>
